@@ -1,0 +1,257 @@
+.focus-widget {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.focus-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.focus-header h2 {
+  margin: 0;
+}
+
+.focus-status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.focus-status.running {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.focus-status.paused {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.focus-time {
+  font-size: 64px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.focus-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.focus-buttons button {
+  flex: 1;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 14px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: 0.25s;
+}
+
+.focus-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.start-btn {
+  background: #22c55e;
+  color: white;
+}
+
+.pause-btn {
+  background: #f59e0b;
+  color: white;
+}
+
+.reset-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.focus-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.focus-buttons button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.35),
+    -6px -6px 12px rgba(255, 255, 255, 0.05);
+}
+
+.focus-buttons button:hover {
+  transform: translateY(-3px);
+  background: rgba(59, 130, 246, 0.25);
+  box-shadow:
+    0 0 20px rgba(59, 130, 246, 0.35);
+}
+
+.focus-buttons button:active {
+  transform: scale(0.95);
+}
+
+/* Focus Circular Timer */
+
+.focus-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto;
+  padding: 8px;
+  transition: 0.5s ease;
+  box-shadow:
+    0 0 25px rgba(59,130,246,0.25);
+}
+
+
+.focus-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(15,23,42,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+
+.focus-inner p {
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+
+/* Running animation */
+
+.focus-status.running {
+  animation: pulseFocus 1.5s infinite;
+}
+
+
+@keyframes pulseFocus {
+  0% {
+    box-shadow: 0 0 0 rgba(59,130,246,0);
+  }
+
+  50% {
+    box-shadow: 0 0 15px rgba(59,130,246,0.8);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(59,130,246,0);
+  }
+}
+
+/* Focus Mode Presets */
+
+.focus-modes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.focus-modes button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.35),
+    -6px -6px 12px rgba(255, 255, 255, 0.04);
+}
+
+.focus-modes button:hover {
+  transform: translateY(-2px);
+  background: rgba(59, 130, 246, 0.25);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
+}
+
+/* ===========================
+   Focus Statistics
+=========================== */
+
+.focus-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.focus-stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+}
+
+.focus-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+}
+
+.focus-stat-card h3 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.focus-stat-card span {
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .focus-stats {
+    grid-template-columns: 1fr;
+  }
+}

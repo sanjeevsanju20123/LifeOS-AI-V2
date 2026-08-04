@@ -1,0 +1,46 @@
+.header{
+    height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    border-bottom:1px solid var(--border);
+    background:var(--surface);
+}
+
+.logo h2{
+    color:var(--text);
+    font-size:24px;
+    font-weight:700;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:var(--card);
+    color:var(--text);
+    transition:.3s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+}
+
+.profile{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:white;
+}

@@ -1,0 +1,42 @@
+.ai-suggestions {
+  margin: 30px 0;
+  padding: 24px;
+  border-radius: 22px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px;
+  border-radius: 16px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+
+  transition: var(--transition);
+}
+
+.suggestion-item:hover {
+  transform: translateX(5px);
+}
+
+.suggestion-item span {
+  font-size: 20px;
+}
+
+.suggestion-item p {
+  color: var(--text);
+  margin: 0;
+}

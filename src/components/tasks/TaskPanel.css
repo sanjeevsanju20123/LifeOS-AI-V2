@@ -1,0 +1,146 @@
+.task-panel {
+  margin: 30px 0;
+  padding: 24px;
+  border-radius: 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: var(--text);
+}
+
+.section-header span {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+
+  transition: var(--transition);
+}
+
+.task-item:hover {
+  transform: translateX(5px);
+}
+
+.task-check {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-info h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.task-info p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.priority {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.priority.high {
+  color: #ef4444;
+}
+
+.priority.medium {
+  color: #f59e0b;
+}
+
+.priority.low {
+  color: #22c55e;
+}
+
+
+@media (max-width: 600px) {
+  .task-item {
+    flex-wrap: wrap;
+  }
+}
+
+.task-input {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.task-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+
+.task-input button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.task-input button:hover {
+  transform: translateY(-2px);
+}
+
+.task-check {
+  cursor: pointer;
+}
+
+.task-item.completed {
+  opacity: 0.6;
+}
+
+.task-item.completed h3 {
+  text-decoration: line-through;
+}

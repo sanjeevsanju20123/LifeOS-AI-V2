@@ -1,0 +1,66 @@
+.hero-card {
+  margin: 30px 0;
+  padding: 32px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-date {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.hero-card h1 {
+  margin: 0 0 12px;
+  font-size: 36px;
+}
+
+.hero-text {
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.ai-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.ai-status span {
+  font-size: 32px;
+}
+
+.ai-status h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.ai-status p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+  .hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-card h1 {
+    font-size: 28px;
+  }
+}

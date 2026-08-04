@@ -1,0 +1,54 @@
+:root {
+
+  /* =========================
+     COLORS
+  ========================== */
+
+  --bg: #0B1220;
+  --surface: #111827;
+  --card: #1A2233;
+
+  --primary: #4F8CFF;
+  --primary-hover: #3D7CFF;
+
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  --text: #F8FAFC;
+  --text-light: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --border: #2A3447;
+
+  /* =========================
+     BORDER RADIUS
+  ========================== */
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  /* =========================
+     SPACING
+  ========================== */
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+
+  /* =========================
+     SHADOWS
+  ========================== */
+
+  --shadow:
+      0 10px 30px rgba(0,0,0,.25);
+
+  /* =========================
+     TRANSITIONS
+  ========================== */
+
+  --transition: .25s ease;
+}

@@ -1,0 +1,50 @@
+.command-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 120px;
+  z-index: 9999;
+}
+
+.command-modal {
+  width: 650px;
+  max-width: 90%;
+  border-radius: 20px;
+  background: rgba(15,23,42,.95);
+  border: 1px solid rgba(255,255,255,.08);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,.45);
+}
+
+.command-modal input {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 18px;
+}
+
+.command-results {
+  display: flex;
+  flex-direction: column;
+}
+
+.command-results button {
+  padding: 18px 20px;
+  border: none;
+  background: transparent;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.command-results button:hover {
+  background: rgba(59,130,246,.2);
+}

@@ -1,0 +1,90 @@
+.tasks-page {
+  margin-top: 30px;
+}
+
+.task-input {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.task-input input {
+  flex: 1;
+  padding: 14px 18px;
+
+  border-radius: 14px;
+  border: 1px solid var(--border);
+
+  background: var(--surface);
+  color: var(--text);
+
+  font-size: 16px;
+}
+
+.task-input button {
+  padding: 14px 22px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: var(--primary);
+  color: white;
+
+  cursor: pointer;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.task-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+  background: var(--card);
+
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.task-title {
+  flex: 1;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.task-title.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.priority {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: var(--surface);
+}
+
+.delete-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+@media (max-width: 600px) {
+  .task-input {
+    flex-direction: column;
+  }
+
+  .task-card {
+    flex-wrap: wrap;
+  }
+}

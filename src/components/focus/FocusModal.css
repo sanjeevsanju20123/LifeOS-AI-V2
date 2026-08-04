@@ -1,0 +1,74 @@
+.focus-modal-overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.55);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  z-index:9999;
+
+  backdrop-filter:blur(6px);
+}
+
+.focus-modal{
+
+  width:420px;
+  max-width:90%;
+
+  padding:40px;
+
+  border-radius:24px;
+
+  background:var(--card);
+
+  text-align:center;
+
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+  animation:popup .3s ease;
+}
+
+.focus-modal h2{
+  margin:20px 0;
+}
+
+.focus-modal p{
+  margin:12px 0;
+  line-height:1.6;
+}
+
+.focus-modal button{
+
+  margin-top:25px;
+
+  padding:14px 30px;
+
+  border:none;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  background:var(--primary);
+
+  color:white;
+
+  font-size:16px;
+}
+
+@keyframes popup{
+
+  from{
+    transform:scale(.8);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}

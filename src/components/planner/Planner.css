@@ -1,0 +1,201 @@
+.planner-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:35px;
+}
+
+.planner-header h1{
+margin:0;
+color:var(--text);
+}
+
+.planner-header p{
+margin-top:6px;
+color:var(--text-muted);
+}
+
+.planner-add-btn{
+padding:12px 20px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.planner-add-btn:hover{
+transform:translateY(-3px);
+}
+
+.planner-timeline{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.planner-event{
+display:grid;
+grid-template-columns:120px 1fr;
+gap:20px;
+align-items:center;
+}
+
+.planner-time{
+font-size:18px;
+font-weight:700;
+color:#3b82f6;
+text-align:right;
+}
+
+.planner-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:18px;
+padding:20px;
+box-shadow:var(--shadow);
+transition:.3s;
+}
+
+.planner-card:hover{
+transform:translateX(6px);
+}
+
+.planner-card h3{
+margin:0;
+color:var(--text);
+}
+
+.planner-card span{
+display:inline-block;
+margin-top:10px;
+padding:6px 12px;
+border-radius:999px;
+background:rgba(59,130,246,.15);
+color:#3b82f6;
+font-size:13px;
+font-weight:600;
+}
+
+/* ===========================
+   Planner Modal
+=========================== */
+
+.planner-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.planner-modal{
+  width:420px;
+  max-width:90%;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 25px 60px rgba(0,0,0,.45);
+
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.planner-modal h2{
+  margin:0 0 10px;
+  color:var(--text);
+}
+
+.planner-modal label{
+  color:var(--text-muted);
+  font-size:14px;
+}
+
+.planner-modal input,
+.planner-modal select{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  font-size:15px;
+  outline:none;
+}
+
+.planner-modal input:focus,
+.planner-modal select:focus{
+  border-color:#3b82f6;
+}
+
+.planner-modal-buttons{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+
+.planner-modal-buttons button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.3s;
+}
+
+.planner-modal-buttons button:first-child{
+  background:#374151;
+  color:white;
+}
+
+.planner-modal-buttons button:last-child{
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  color:white;
+}
+
+.planner-modal-buttons button:hover{
+  transform:translateY(-2px);
+}
+
+.planner-card-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:16px;
+}
+
+.planner-actions{
+display:flex;
+gap:8px;
+}
+
+.planner-actions button{
+width:36px;
+height:36px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:rgba(255,255,255,.06);
+color:var(--text);
+transition:.25s;
+}
+
+.planner-actions button:hover{
+transform:scale(1.08);
+}
+
+.edit-btn:hover{
+background:rgba(59,130,246,.2);
+}
+
+.delete-btn:hover{
+background:rgba(239,68,68,.2);
+}
