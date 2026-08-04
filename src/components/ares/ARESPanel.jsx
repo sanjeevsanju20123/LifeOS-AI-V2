@@ -3,6 +3,7 @@ import { useProductivity } from "../../hooks/useProductivity";
 import { useFocus } from "../../context/FocusContext";
 import { getRecommendation } from "../../services/ai/recommendationEngine";
 import { getDailyBrief } from "../../services/ai/briefingEngine";
+import ProductivityRing from "./ProductivityRing";
 
 function ARESPanel() {
  const {
@@ -59,9 +60,9 @@ function ARESPanel() {
 </div>
         </div>
 
-        <span className="ares-grade">
-  {productivityScore}%
-</span>
+        <ProductivityRing
+  score={productivityScore}
+/>
       </div>
 
       <div className="ares-summary">

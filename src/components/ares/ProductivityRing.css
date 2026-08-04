@@ -1,0 +1,66 @@
+.productivity-ring{
+
+    position:relative;
+
+    width:180px;
+
+    height:180px;
+
+    margin:30px auto;
+}
+
+.productivity-ring svg{
+
+    transform:rotate(-90deg);
+}
+
+.ring-background{
+
+    fill:none;
+
+    stroke:rgba(255,255,255,.08);
+
+    stroke-width:12;
+}
+
+.ring-progress{
+
+    fill:none;
+
+    stroke:url(#ringGradient);
+
+    stroke-width:12;
+
+    stroke-linecap:round;
+
+    transition:stroke-dashoffset 1s ease;
+}
+
+.ring-content{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.ring-content h1{
+
+    font-size:40px;
+
+    color:white;
+}
+
+.ring-content p{
+
+    color:#94a3b8;
+
+    margin-top:8px;
+}
