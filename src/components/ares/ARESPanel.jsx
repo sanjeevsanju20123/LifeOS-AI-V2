@@ -1,8 +1,8 @@
 import "./ARESPanel.css";
 import { useProductivity } from "../../hooks/useProductivity";
-import { useTasks } from "../../context/TaskContext";
 import { useFocus } from "../../context/FocusContext";
-import { getRecommendation } from "../../services/recommendationEngine";
+import { getRecommendation } from "../../services/ai/recommendationEngine";
+import { getDailyBrief } from "../../services/ai/briefingEngine";
 
 function ARESPanel() {
  const {
@@ -15,15 +15,7 @@ function ARESPanel() {
   streak,
 } = useProductivity();
 
-  const { stats } = useTasks();
-  const { stats: focusStats, startTimer, setFocusMode } = useFocus();
-
-  const hour = new Date().getHours();
-
-  let greeting = "Good Evening";
-
-  if (hour < 12) greeting = "Good Morning";
-  else if (hour < 18) greeting = "Good Afternoon";
+  const { startTimer, setFocusMode, } = useFocus();
 
   const recommendation = getRecommendation({
   productivityScore,
@@ -31,6 +23,14 @@ function ARESPanel() {
   pendingTasks,
   plannerEvents,
   focusMinutes,
+});
+
+    const briefing = getDailyBrief({
+  completedTasks,
+  pendingTasks,
+  plannerEvents,
+  focusMinutes,
+  productivityScore,
 });
 
   return (
@@ -46,7 +46,17 @@ function ARESPanel() {
     Online
   </div>
 </div>
-          <p>{greeting}, Sanjeev 👋</p>
+          <div className="ares-brief">
+  <p>🤖 DAILY BRIEF</p>
+
+  <h3>
+    {briefing.greeting}, Sanjeev 👋
+  </h3>
+
+  <p>{briefing.headline}</p>
+
+  <p>{briefing.overview}</p>
+</div>
         </div>
 
         <span className="ares-grade">
@@ -77,6 +87,16 @@ function ARESPanel() {
 
       </div>
 
+      <div className="ares-insight">
+
+  <h3>🧠 AI Insight</h3>
+
+  <p>
+    Your productivity improves when you finish existing tasks before creating new ones.
+  </p>
+
+</div>
+
       <div className="ares-mission">
         <h3>🎯 Today's Mission</h3>
 
@@ -92,10 +112,29 @@ function ARESPanel() {
             startTimer();
           }}
         >
-          Start Focus
-        </button>
+         <div className="ares-buttons">
 
-      </div>
+  <button
+    onClick={() => {
+      setFocusMode("quick");
+      startTimer();
+    }}
+  >
+    ⚡ Start Focus
+  </button>
+
+  <button>
+    📅 Planner
+  </button>
+
+  <button>
+    ✅ Tasks
+  </button>
+
+</div>
+</button>
+
+</div>
 
     </section>
   );
