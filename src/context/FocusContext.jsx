@@ -1,4 +1,3 @@
-// src/context/FocusContext.jsx
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const FocusContext = createContext();
