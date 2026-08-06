@@ -1,69 +1,55 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import * as taskService from "../services/tasks";
 
 const TaskContext = createContext();
 
-const STORAGE_KEY = "lifeos-tasks";
-
-const defaultTasks = [
-  {
-    id: 1,
-    title: "Complete LifeOS Dashboard",
-    category: "Work",
-    priority: "High",
-    due: "Today",
-    completed: false,
-  },
-  {
-    id: 2,
-    title: "Read 20 Pages",
-    category: "Personal",
-    priority: "Medium",
-    due: "Today",
-    completed: false,
-  },
-];
-
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : defaultTasks;
+    try {
+      const loaded = taskService.loadTasks();
+      return loaded.length ? loaded : [
+        { id: 1, title: "Complete LifeOS Dashboard", category: "Work", priority: "High", due: "Today", completed: false },
+        { id: 2, title: "Read 20 Pages", category: "Personal", priority: "Medium", due: "Today", completed: false },
+      ];
+    } catch (e) {
+      return [];
+    }
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    try {
+      taskService.saveTasks(tasks);
+    } catch (e) {
+      console.error("TaskProvider save error", e);
+    }
   }, [tasks]);
 
   function addTask(task) {
-    setTasks((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        completed: false,
-        ...task,
-      },
-    ]);
+    const newTask = taskService.addTask(task);
+    setTasks(taskService.loadTasks());
+    return newTask;
   }
 
   function toggleTask(id) {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? { ...task, completed: !task.completed }
-          : task
-      )
-    );
+    const task = tasks.find((t) => t.id === id);
+    if (!task) return;
+    taskService.updateTask(id, { completed: !task.completed });
+    setTasks(taskService.loadTasks());
   }
 
-  function deleteTask(id) {
-    setTasks((prev) => prev.filter((task) => task.id !== id));
+  function deleteTaskById(id) {
+    taskService.deleteTask(id);
+    setTasks(taskService.loadTasks());
   }
 
   function updateTask(id, updates) {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, ...updates } : task
-      )
-    );
+    taskService.updateTask(id, updates);
+    setTasks(taskService.loadTasks());
+  }
+
+  function clearAllTasks() {
+    taskService.clearTasks();
+    setTasks([]);
   }
 
   const stats = {
@@ -73,16 +59,7 @@ export function TaskProvider({ children }) {
   };
 
   return (
-    <TaskContext.Provider
-      value={{
-        tasks,
-        stats,
-        addTask,
-        toggleTask,
-        deleteTask,
-        updateTask,
-      }}
-    >
+    <TaskContext.Provider value={{ tasks, stats, addTask, toggleTask, deleteTask: deleteTaskById, updateTask, clearAllTasks }}>
       {children}
     </TaskContext.Provider>
   );
