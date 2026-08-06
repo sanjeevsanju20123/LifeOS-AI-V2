@@ -1,32 +1,50 @@
+import React from "react";
 import "./StatsGrid.css";
+import { useFocus } from "../../context/FocusContext";
 
 function StatsGrid() {
-  const stats = [
+  const { stats } = useFocus();
+
+  const totalMinutes = (stats?.totalMinutes ?? 0);
+  const totalSessions = (stats?.sessions ?? 0);
+  const streak = (stats?.streak ?? 0);
+
+  // Weekly goal in minutes (5 hours by default). Adjust as you like.
+  const weeklyGoalMinutes = 5 * 60;
+  const focusScore = Math.min(
+    100,
+    Math.round((totalMinutes / weeklyGoalMinutes) * 100)
+  );
+
+  // Format as "4.5h" similar to original
+  const focusHours = (totalMinutes / 60).toFixed(1) + "h";
+
+  const statsData = [
     {
       icon: "🎯",
       title: "Focus Score",
-      value: "86%",
+      value: `${focusScore}%`,
     },
     {
       icon: "✅",
-      title: "Tasks Done",
-      value: "12",
+      title: "Sessions",
+      value: `${totalSessions}`,
     },
     {
       icon: "🔥",
       title: "Day Streak",
-      value: "7 Days",
+      value: `${streak} Day${streak !== 1 ? "s" : ""}`,
     },
     {
       icon: "⏱️",
       title: "Focus Time",
-      value: "4.5h",
+      value: focusHours,
     },
   ];
 
   return (
     <section className="stats-grid">
-      {stats.map((stat, index) => (
+      {statsData.map((stat, index) => (
         <div className="stat-card" key={index}>
           <div className="stat-icon">{stat.icon}</div>
 
