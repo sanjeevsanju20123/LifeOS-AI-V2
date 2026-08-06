@@ -14,5 +14,6 @@ test('StatsGrid renders inside providers', () => {
     </FocusProvider>
   );
   // check that at least one stat label exists (adjust selector if your StatsGrid uses specific text)
-  expect(screen.getByText(/sessions|minutes|streak/i)).toBeTruthy();
+  expect(screen.getByText("Sessions")).toBeInTheDocument();
+expect(screen.getByText("Day Streak")).toBeInTheDocument();
 });
