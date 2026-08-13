@@ -4,72 +4,212 @@ import React, {
   useState,
   useEffect,
 } from "react";
+
 import * as taskService from "../services/tasks";
 
-const TaskContext = createContext();
+import {
+  recordTaskCompletion,
+} from "../services/ai/learningEngine";
+
+const TaskContext = createContext(null);
 
 export function TaskProvider({ children }) {
+  // =========================================
+  // LOAD TASKS
+  // =========================================
+
   const [tasks, setTasks] = useState(() => {
     try {
-      const loaded = taskService.loadTasks();
-      return loaded.length ? loaded : [
-        { id: 1, title: "Complete LifeOS Dashboard", category: "Work", priority: "High", due: "Today", completed: false },
-        { id: 2, title: "Read 20 Pages", category: "Personal", priority: "Medium", due: "Today", completed: false },
-      ];
-    } catch (e) {
+      // IMPORTANT:
+      // If localStorage is empty, return [].
+      // Do NOT recreate default tasks.
+      return taskService.loadTasks();
+    } catch (error) {
+      console.error(
+        "TaskProvider load error:",
+        error
+      );
+
       return [];
     }
   });
 
+  // =========================================
+  // SAVE TASKS
+  // =========================================
+
   useEffect(() => {
     try {
       taskService.saveTasks(tasks);
-    } catch (e) {
-      console.error("TaskProvider save error", e);
+    } catch (error) {
+      console.error(
+        "TaskProvider save error:",
+        error
+      );
     }
   }, [tasks]);
 
+  // =========================================
+  // ADD TASK
+  // =========================================
+
   function addTask(task) {
-    const newTask = taskService.addTask(task);
-    setTasks(taskService.loadTasks());
+    const newTask = {
+      id: Date.now(),
+      title: task.title || "New Task",
+      category: task.category || "General",
+      priority: task.priority || "Medium",
+      due: task.due || "Today",
+      completed: false,
+      ...task,
+    };
+
+    setTasks((currentTasks) => [
+      ...currentTasks,
+      newTask,
+    ]);
+
     return newTask;
   }
 
+  // =========================================
+  // TOGGLE TASK
+  // =========================================
+
   function toggleTask(id) {
-    const task = tasks.find((t) => t.id === id);
-    if (!task) return;
-    taskService.updateTask(id, { completed: !task.completed });
-    setTasks(taskService.loadTasks());
+    const task = tasks.find(
+      (item) => item.id === id
+    );
+
+    if (!task) {
+      return;
+    }
+
+    const willComplete = !task.completed;
+
+    setTasks((currentTasks) =>
+      currentTasks.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              completed: willComplete,
+            }
+          : item
+      )
+    );
+
+    // =========================================
+    // ARES LEARNING
+    // Record only when task becomes completed
+    // =========================================
+
+    if (willComplete) {
+      try {
+        recordTaskCompletion({
+          title: task.title,
+          category: task.category,
+          priority: task.priority,
+        });
+      } catch (error) {
+        console.error(
+          "ARES task learning error:",
+          error
+        );
+      }
+    }
   }
+
+  // =========================================
+  // DELETE TASK
+  // =========================================
 
   function deleteTaskById(id) {
-    taskService.deleteTask(id);
-    setTasks(taskService.loadTasks());
+    setTasks((currentTasks) =>
+      currentTasks.filter(
+        (task) => task.id !== id
+      )
+    );
   }
+
+  // =========================================
+  // UPDATE TASK
+  // =========================================
 
   function updateTask(id, updates) {
-    taskService.updateTask(id, updates);
-    setTasks(taskService.loadTasks());
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              ...updates,
+            }
+          : task
+      )
+    );
   }
 
+  // =========================================
+  // CLEAR ALL TASKS
+  // =========================================
+
   function clearAllTasks() {
-    taskService.clearTasks();
     setTasks([]);
   }
 
+  // =========================================
+  // TASK STATS
+  // =========================================
+
   const stats = {
     total: tasks.length,
-    completed: tasks.filter((t) => t.completed).length,
-    pending: tasks.filter((t) => !t.completed).length,
+
+    completed: tasks.filter(
+      (task) => task.completed
+    ).length,
+
+    pending: tasks.filter(
+      (task) => !task.completed
+    ).length,
   };
 
+  // =========================================
+  // PROVIDER
+  // =========================================
+
   return (
-    <TaskContext.Provider value={{ tasks, stats, addTask, toggleTask, deleteTask: deleteTaskById, updateTask, clearAllTasks }}>
+    <TaskContext.Provider
+      value={{
+        tasks,
+        stats,
+
+        addTask,
+        toggleTask,
+
+        deleteTask:
+          deleteTaskById,
+
+        updateTask,
+        clearAllTasks,
+      }}
+    >
       {children}
     </TaskContext.Provider>
   );
 }
 
+// =========================================
+// USE TASKS
+// =========================================
+
 export function useTasks() {
-  return useContext(TaskContext);
+  const context =
+    useContext(TaskContext);
+
+  if (!context) {
+    throw new Error(
+      "useTasks must be used inside TaskProvider"
+    );
+  }
+
+  return context;
 }

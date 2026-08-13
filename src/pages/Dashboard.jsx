@@ -1,38 +1,108 @@
+import "./Dashboard.css";
+
 import HeroCard from "../components/dashboard/HeroCard";
-import FocusWidget from "../components/focus/FocusWidget";
 import StatsGrid from "../components/dashboard/StatsGrid";
-import AISuggestions from "../components/dashboard/AISuggestions";
-import QuickActions from "../components/dashboard/QuickActions";
-import FocusTimer from "../components/dashboard/FocusTimer";
-import TaskPanel from "../components/tasks/TaskPanel";
-import BottomDock from "../components/layout/BottomDock";
-import ProductivityCard from "../components/dashboard/ProductivityCard";
-import AnalyticsDashboard from "../components/analytics/AnalyticsDashboard";
+
 import ARESPanel from "../components/ares/ARESPanel";
+
+import TaskPanel from "../components/tasks/TaskPanel";
+
+import FocusWidget from "../components/focus/FocusWidget";
+
+import AnalyticsDashboard from "../components/analytics/AnalyticsDashboard";
+
+import AISuggestions from "../components/dashboard/AISuggestions";
+
+import QuickActions from "../components/dashboard/QuickActions";
+
+import FocusTimer from "../components/dashboard/FocusTimer";
+
+import MusicPlayer from "../components/music/MusicPlayer";
 
 function Dashboard() {
   return (
-    <main className="container fade-up">
-      <ProductivityCard />
+    <main className="dashboard">
 
-      <AnalyticsDashboard />
+      {/* HERO */}
 
-      <HeroCard />
+      <section className="dashboard-hero">
+        <HeroCard />
+      </section>
 
-      <ARESPanel />
 
-      <FocusWidget />
+      {/* STATS */}
 
-      <StatsGrid />
+      <section className="dashboard-stats">
+        <StatsGrid />
+      </section>
 
-      <TaskPanel />
 
-      <AISuggestions />
+      {/* ARES + SMART TASKS + MUSIC */}
 
-      <QuickActions />
+      <section className="dashboard-main-grid">
 
-      <FocusTimer />
-      
+        {/* LEFT — ARES */}
+
+        <div className="dashboard-ares">
+          <ARESPanel />
+        </div>
+
+
+        {/* RIGHT — TASKS + MUSIC */}
+
+        <div className="dashboard-right-column">
+
+          <div className="dashboard-tasks">
+            <TaskPanel />
+          </div>
+
+
+          {/* MUSIC DIRECTLY BELOW SMART TASKS */}
+
+          <div className="dashboard-music">
+            <MusicPlayer />
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* FOCUS */}
+
+      <section className="dashboard-focus">
+        <FocusWidget />
+      </section>
+
+
+      {/* ANALYTICS */}
+
+      <section className="dashboard-analytics">
+        <AnalyticsDashboard />
+      </section>
+
+
+      {/* AI + QUICK ACTIONS */}
+
+      <section className="dashboard-bottom-grid">
+
+        <div className="dashboard-ai">
+          <AISuggestions />
+        </div>
+
+
+        <div className="dashboard-actions">
+          <QuickActions />
+        </div>
+
+      </section>
+
+
+      {/* FOCUS TIMER */}
+
+      <section className="dashboard-focus-timer">
+        <FocusTimer />
+      </section>
 
     </main>
   );

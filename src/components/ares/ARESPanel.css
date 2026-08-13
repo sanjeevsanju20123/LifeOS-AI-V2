@@ -1,322 +1,1016 @@
-.ares-panel{
-    position:relative;
+/* =========================================
+   ARES INTELLIGENCE
+========================================= */
 
-    background:rgba(15,23,42,.82);
+.ares-panel {
+  position: relative;
+  width: 100%;
+  min-width: 0;
 
-    border:1px solid rgba(255,255,255,.08);
+  padding: 28px;
 
-    backdrop-filter:blur(18px);
+  border-radius: 24px;
 
-    border-radius:28px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(59, 130, 246, 0.12),
+      transparent 35%
+    ),
+    var(--card);
 
-    padding:30px;
+  border: 1px solid var(--border);
 
-    overflow:hidden;
+  box-shadow: var(--shadow);
 
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.45);
+  overflow: hidden;
 
-    transition:.35s;
+  box-sizing: border-box;
 }
 
-.ares-panel:hover{
+/* =========================================
+   HEADER
+========================================= */
 
-    transform:translateY(-4px);
+.ares-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    box-shadow:
-        0 30px 80px rgba(59,130,246,.20);
+  gap: 20px;
+
+  margin-bottom: 26px;
 }
 
-.ares-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    margin-bottom:28px;
+.ares-title {
+  min-width: 0;
 }
 
-.ares-header h2 {
+.ares-heading-row {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.ares-brain {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 15px;
+
+  background:
+    rgba(59, 130, 246, 0.12);
+
+  border:
+    1px solid rgba(59, 130, 246, 0.22);
+
+  font-size: 24px;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ares-panel:hover .ares-brain {
+  transform: scale(1.06);
+
+  box-shadow:
+    0 0 22px rgba(59, 130, 246, 0.22);
+}
+
+.ares-title h2 {
   margin: 0;
+
   color: var(--text);
+
+  font-size: 21px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
 }
 
-.ares-header p {
+/* =========================================
+   AI STATUS
+========================================= */
+
+.ai-status {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
   margin-top: 6px;
+
   color: var(--text-muted);
+
+  font-size: 12px;
 }
 
-.ares-grade{
+.status-dot {
+  width: 7px;
+  height: 7px;
 
-    width:90px;
+  border-radius: 50%;
 
-    height:90px;
+  background: #22c55e;
 
-    border-radius:50%;
+  box-shadow:
+    0 0 8px rgba(34, 197, 94, 0.75);
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:22px;
-
-    font-weight:700;
-
-    color:white;
-
-    background:linear-gradient(
-        135deg,
-        #3b82f6,
-        #8b5cf6
-    );
-
-    box-shadow:
-        0 0 30px rgba(59,130,246,.35);
+  animation:
+    aresStatusPulse 2s ease-in-out infinite;
 }
 
-.ares-summary{
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:18px;
-
-    margin:28px 0;
-}
-
-.summary-card{
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.06);
-
-    border-radius:20px;
-
-    padding:24px;
-
-    transition:.35s;
-
-    cursor:pointer;
-}
-
-.summary-card h3{
-
-    color:#94a3b8;
-
-    font-size:15px;
-
-    margin-bottom:12px;
-}
-
-.summary-card span{
-
-    font-size:34px;
-
-    font-weight:700;
-
-    color:white;
-}
-
-.ares-mission{
-
-    margin-top:22px;
-
-    background:rgba(255,255,255,.04);
-
-    border-radius:20px;
-
-    padding:22px;
-
-    border:1px solid rgba(255,255,255,.06);
-}
-
-.ares-mission h3 {
-  margin-bottom: 10px;
-}
-
-.ares-mission p {
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.ares-buttons{
-
-    display:flex;
-
-    gap:16px;
-
-    margin-top:30px;
-
-    flex-wrap:wrap;
-}
-
-.ares-buttons button{
-
-    flex:1;
-
-    min-width:180px;
-
-    border:none;
-
-    border-radius:16px;
-
-    padding:16px;
-
-    cursor:pointer;
-
-    color:white;
-
-    font-weight:600;
-
-    font-size:15px;
-
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #7c3aed
-    );
-
-    transition:.3s;
-}
-
-.ares-buttons button:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 12px 30px rgba(59,130,246,.35);
-}
-
-@media (max-width:768px) {
-  .ares-summary {
-    grid-template-columns: 1fr;
+@keyframes aresStatusPulse {
+  0%,
+  100% {
+    opacity: 1;
   }
 
-  .ares-buttons {
-    flex-direction: column;
+  50% {
+    opacity: 0.45;
   }
 }
 
-.ares-title{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+/* =========================================
+   SUMMARY
+========================================= */
+
+.ares-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  width: 100%;
 }
 
-.ai-status{
+.summary-card {
+  display: flex;
+  align-items: center;
 
-    display:flex;
+  gap: 12px;
 
-    align-items:center;
+  min-width: 0;
 
-    gap:8px;
+  padding: 15px;
 
-    color:#94a3b8;
+  border-radius: 16px;
 
-    font-size:14px;
+  background:
+    rgba(255, 255, 255, 0.035);
 
-    margin-top:10px;
-}
+  border:
+    1px solid var(--border);
 
-.status-dot{
+  box-sizing: border-box;
 
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:#22c55e;
-
-    animation:pulse 1.6s infinite;
-}
-
-@keyframes pulse{
-
-0%{
-
-box-shadow:0 0 0 rgba(34,197,94,0);
-
-}
-
-50%{
-
-box-shadow:0 0 16px rgba(34,197,94,.9);
-
-}
-
-100%{
-
-box-shadow:0 0 0 rgba(34,197,94,0);
-
-}
-}
-
-.ares-insight{
-
-    margin-top:25px;
-
-    background:linear-gradient(
-        135deg,
-        rgba(59,130,246,.12),
-        rgba(139,92,246,.12)
-    );
-
-    border-radius:22px;
-
-    padding:24px;
-
-    border:1px solid rgba(59,130,246,.20);
-}
-
-.ares-insight h3{
-
-    margin-bottom:12px;
-}
-
-.ares-insight p{
-
-    color:#cbd5e1;
-
-    line-height:1.8;
-}
-
-.ares-panel::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:280px;
-
-    height:280px;
-
-    border-radius:50%;
-
-    background:rgba(59,130,246,.12);
-
-    filter:blur(90px);
-
-    top:-120px;
-
-    right:-120px;
-
-    z-index:0;
-}
-
-.ares-panel>*{
-
-    position:relative;
-
-    z-index:1;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
 .summary-card:hover {
-    transform: translateY(-6px);
-    border-color: #3b82f6;
-    box-shadow: 0 15px 35px rgba(59,130,246,.25);
+  transform: translateY(-3px);
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  border-color:
+    rgba(59, 130, 246, 0.25);
+}
+
+.summary-icon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(59, 130, 246, 0.10);
+
+  font-size: 17px;
+}
+
+.summary-card h3 {
+  margin: 0 0 4px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.summary-card span {
+  color: var(--text);
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+/* =========================================
+   INSIGHT + LEARNING + MISSION
+========================================= */
+
+.ares-insight,
+.ares-learning,
+.ares-mission {
+  position: relative;
+
+  padding: 20px;
+
+  border-radius: 18px;
+
+  margin-top: 14px;
+
+  border: 1px solid var(--border);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  box-sizing: border-box;
+}
+
+/* =========================================
+   ARES INSIGHT
+========================================= */
+
+.ares-insight {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.07),
+      rgba(139, 92, 246, 0.035)
+    );
+}
+
+.ares-insight:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(59, 130, 246, 0.25);
+
+  box-shadow:
+    0 8px 25px rgba(59, 130, 246, 0.08);
+}
+
+/* =========================================
+   ARES LEARNING
+========================================= */
+
+.ares-learning {
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34, 197, 94, 0.07),
+      rgba(59, 130, 246, 0.045),
+      rgba(34, 197, 94, 0.06)
+    );
+
+  background-size: 200% 200%;
+
+  animation:
+    aresLearningBackground 7s ease-in-out infinite;
+}
+
+/* Moving glow */
+
+.ares-learning::before {
+  content: "";
+
+  position: absolute;
+
+  top: -55px;
+  right: -45px;
+
+  width: 140px;
+  height: 140px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(34, 197, 94, 0.18),
+      rgba(34, 197, 94, 0.04) 45%,
+      transparent 72%
+    );
+
+  filter: blur(10px);
+
+  pointer-events: none;
+
+  animation:
+    aresLearningGlow 5s ease-in-out infinite;
+}
+
+/* Secondary blue glow */
+
+.ares-learning::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -60px;
+  left: -45px;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.12),
+      transparent 70%
+    );
+
+  filter: blur(12px);
+
+  pointer-events: none;
+
+  animation:
+    aresLearningGlowSecondary 6s ease-in-out infinite;
+}
+
+/* =========================================
+   LEARNING BACKGROUND ANIMATION
+========================================= */
+
+@keyframes aresLearningBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =========================================
+   LEARNING GLOW ANIMATION
+========================================= */
+
+@keyframes aresLearningGlow {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+
+    opacity: 0.55;
+  }
+
+  50% {
+    transform:
+      translate3d(-18px, 14px, 0)
+      scale(1.12);
+
+    opacity: 0.85;
+  }
+}
+
+@keyframes aresLearningGlowSecondary {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+
+    opacity: 0.35;
+  }
+
+  50% {
+    transform:
+      translate3d(18px, -12px, 0)
+      scale(1.15);
+
+    opacity: 0.65;
+  }
+}
+
+/* =========================================
+   LEARNING CONTENT
+========================================= */
+
+.ares-learning .ares-section-title,
+.ares-learning h4,
+.ares-learning p,
+.ares-learning-message {
+  position: relative;
+
+  z-index: 2;
+}
+
+/* =========================================
+   LEARNING ICON
+========================================= */
+
+.ares-learning .ares-section-title span {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 9px;
+
+  background:
+    rgba(34, 197, 94, 0.10);
+
+  border:
+    1px solid rgba(34, 197, 94, 0.18);
+
+  animation:
+    aresLearningBrain 3s ease-in-out infinite;
+}
+
+@keyframes aresLearningBrain {
+  0%,
+  100% {
+    transform: scale(1);
+
+    box-shadow:
+      0 0 0 rgba(34, 197, 94, 0);
+  }
+
+  50% {
+    transform: scale(1.08);
+
+    box-shadow:
+      0 0 16px rgba(34, 197, 94, 0.18);
+  }
+}
+
+/* =========================================
+   LEARNING ACTIVE INDICATOR
+========================================= */
+
+.ares-learning .ares-section-title::after {
+  content: "LEARNING";
+
+  margin-left: auto;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  color: #86efac;
+
+  background:
+    rgba(34, 197, 94, 0.08);
+
+  border:
+    1px solid rgba(34, 197, 94, 0.16);
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+
+  animation:
+    aresLearningIndicator 2.5s ease-in-out infinite;
+}
+
+@keyframes aresLearningIndicator {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   LEARNING HOVER
+========================================= */
+
+.ares-learning:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(34, 197, 94, 0.28);
+
+  box-shadow:
+    0 8px 28px rgba(34, 197, 94, 0.09);
+}
+
+/* =========================================
+   LEARNING MESSAGE BOX
+========================================= */
+
+.ares-learning-message {
+  padding: 12px 14px;
+
+  margin-top: 10px !important;
+
+  border-radius: 12px;
+
+  background:
+    rgba(34, 197, 94, 0.055);
+
+  border:
+    1px solid rgba(34, 197, 94, 0.13);
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ares-learning:hover .ares-learning-message {
+  background:
+    rgba(34, 197, 94, 0.08);
+
+  border-color:
+    rgba(34, 197, 94, 0.20);
+}
+
+/* =========================================
+   ARES MISSION
+========================================= */
+
+.ares-mission {
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+.ares-mission:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(59, 130, 246, 0.25);
+
+  box-shadow:
+    0 8px 25px rgba(59, 130, 246, 0.06);
+}
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.ares-section-title {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+}
+
+.ares-section-title span {
+  font-size: 17px;
+}
+
+.ares-section-title h3 {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.6px;
+}
+
+/* =========================================
+   HEADINGS
+========================================= */
+
+.ares-insight h4,
+.ares-learning h4,
+.ares-mission h4 {
+  margin: 0 0 7px;
+
+  color: var(--text);
+
+  font-size: 17px;
+
+  line-height: 1.4;
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+.ares-insight p,
+.ares-learning p,
+.ares-mission p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+/* =========================================
+   GOAL INSIGHT
+========================================= */
+
+.ares-goal-insight {
+  margin-top: 10px !important;
+
+  padding-top: 10px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================
+   ACTION BUTTON
+========================================= */
+
+.ares-buttons {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+
+  margin-top: 20px;
+}
+
+.ares-buttons button {
+  width: 100%;
+
+  padding: 13px 20px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3b82f6,
+      #2563eb
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.ares-buttons button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 25px rgba(59, 130, 246, 0.30);
+}
+
+.ares-buttons button:active {
+  transform: scale(0.96);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .ares-summary {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .ares-panel {
+    padding: 20px;
+  }
+
+  .ares-header {
+    align-items: flex-start;
+  }
+
+  .ares-title h2 {
+    font-size: 18px;
+  }
+
+  .ares-brain {
+    width: 42px;
+    height: 42px;
+
+    font-size: 21px;
+  }
+
+  .summary-card {
+    padding: 13px;
+  }
+
+  .ares-buttons button {
+    width: 100%;
+  }
+
+  .ares-insight,
+  .ares-learning,
+  .ares-mission {
+    padding: 17px;
+  }
+
+  .ares-learning .ares-section-title::after {
+    font-size: 7px;
+
+    padding: 3px 6px;
+  }
+}
+
+/* =========================================
+   DASHBOARD MAIN GRID
+========================================= */
+
+.dashboard-main-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(320px, 1fr);
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+
+  align-items: stretch;
+}
+
+@media (max-width: 600px) {
+  .ares-summary {
+    grid-template-columns:
+      1fr;
+  }
+
+  .dashboard-main-grid {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+   Reduce animations when requested
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ares-learning,
+  .ares-learning::before,
+  .ares-learning::after,
+  .ares-learning .ares-section-title span,
+  .ares-learning .ares-section-title::after,
+  .status-dot {
+    animation: none;
+  }
+
+  .ares-learning,
+  .ares-insight,
+  .ares-mission,
+  .summary-card {
+    transition: none;
+  }
+}
+
+/* =========================================
+   ARES — AURORA OFF
+========================================= */
+
+.ares-learning.no-aurora {
+  background: var(--surface);
+  animation: none;
+}
+
+.ares-learning.no-aurora::before,
+.ares-learning.no-aurora::after {
+  display: none;
+}
+
+/* =========================================
+   ARES — AURORA OFF
+========================================= */
+
+.ares-panel.no-aurora {
+  background: var(--card);
+}
+
+.ares-panel.no-aurora .ares-learning {
+  background: var(--surface);
+  animation: none;
+}
+
+.ares-panel.no-aurora .ares-learning::before,
+.ares-panel.no-aurora .ares-learning::after {
+  display: none;
+}
+
+/* =========================================
+   ARES PATTERN INTELLIGENCE
+========================================= */
+
+.ares-patterns {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Pattern Grid */
+
+.ares-pattern-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 14px;
+}
+
+/* Individual Pattern */
+
+.ares-pattern-card {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ares-pattern-card:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.055);
+
+  border-color: rgba(120, 180, 255, 0.2);
+}
+
+/* Pattern Icon */
+
+.pattern-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: rgba(90, 140, 255, 0.12);
+
+  font-size: 18px;
+}
+
+/* Pattern Text */
+
+.ares-pattern-card > div {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.pattern-label {
+  color: var(--text-muted, #8b95a7);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  margin-bottom: 3px;
+}
+
+.ares-pattern-card strong {
+  color: var(--text-primary, #ffffff);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-transform: capitalize;
+}
+
+.ares-pattern-card small {
+  margin-top: 3px;
+
+  color: var(--text-muted, #8b95a7);
+
+  font-size: 11px;
+}
+
+/* Pattern Message */
+
+.ares-pattern-message {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-top: 14px;
+
+  padding: 13px 14px;
+
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(90, 140, 255, 0.10),
+    rgba(160, 90, 255, 0.08)
+  );
+
+  border: 1px solid rgba(120, 150, 255, 0.12);
+}
+
+.ares-pattern-message > span {
+  font-size: 17px;
+
+  flex-shrink: 0;
+}
+
+.ares-pattern-message p {
+  margin: 0;
+
+  color: var(--text-secondary, #c4cad5);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+  .ares-pattern-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,50 +1,558 @@
+/* =========================================
+   BOTTOM DOCK
+========================================= */
+
 nav {
   position: fixed;
+
   bottom: 20px;
+
   left: 50%;
+
   transform: translateX(-50%);
 
   display: flex;
+
+  align-items: center;
+
   gap: 16px;
 
   padding: 14px 22px;
 
   background: var(--card);
+
   border: 1px solid var(--border);
+
   border-radius: 18px;
+
   box-shadow: var(--shadow);
 
   z-index: 1000;
+
+  max-width: calc(100vw - 20px);
+
+  box-sizing: border-box;
 }
+
+
+/* =========================================
+   DOCK BUTTON
+========================================= */
 
 .dock-btn {
   border: none;
+
   background: transparent;
+
   color: var(--text);
+
   cursor: pointer;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
+  justify-content: center;
+
   gap: 4px;
 
   font-size: 13px;
-  transition: var(--transition);
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
+
+
+/* =========================================
+   ICON
+========================================= */
 
 .dock-btn span {
   font-size: 22px;
+
+  line-height: 1;
 }
+
+
+/* =========================================
+   HOVER
+========================================= */
 
 .dock-btn:hover {
   color: var(--primary);
+
   transform: translateY(-3px);
 }
 
-.dock-btn {
-  text-decoration: none;
-}
+
+/* =========================================
+   ACTIVE
+========================================= */
 
 .dock-btn.active {
   color: var(--primary);
+}
+
+
+/* =========================================
+   MINI MUSIC PLAYER
+========================================= */
+
+.mini-music {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 7px 9px;
+
+  width: 190px;
+
+  min-width: 190px;
+
+  max-width: 190px;
+
+  height: 44px;
+
+  min-height: 44px;
+
+  max-height: 44px;
+
+  flex: 0 0 190px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgba(59, 130, 246, 0.22);
+
+  border-radius: 12px;
+
+  background:
+    rgba(59, 130, 246, 0.08);
+
+  color: var(--text);
+}
+
+
+/* =========================================
+   MUSIC ICON
+========================================= */
+
+.mini-music-icon {
+  width: 28px;
+
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background:
+    rgba(59, 130, 246, 0.15);
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   MUSIC PLAYING ANIMATION
+========================================= */
+
+.mini-music.playing .mini-music-icon {
+  animation: musicPulse 1.2s ease-in-out infinite;
+
+  box-shadow:
+    0 0 6px rgba(59, 130, 246, 0.35),
+    0 0 14px rgba(59, 130, 246, 0.25);
+}
+
+
+/* =========================================
+   STATION NAME
+========================================= */
+
+.mini-music-text {
+  display: block;
+
+  width: 95px;
+
+  min-width: 0;
+
+  max-width: 95px;
+
+  flex: 0 1 95px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: var(--text);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   PLAY / PAUSE BUTTON
+========================================= */
+
+.mini-music-play {
+  width: 28px;
+
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background:
+    rgba(59, 130, 246, 0.16);
+
+  color: #60a5fa;
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+  line-height: 1;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================================
+   PLAY HOVER
+========================================= */
+
+.mini-music-play:hover {
+  background:
+    rgba(59, 130, 246, 0.30);
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================
+   PLAY ACTIVE
+========================================= */
+
+.mini-music-play:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.mini-music-play:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================
+   MUSIC BARS
+========================================= */
+
+.music-bars {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  width: 16px;
+
+  height: 18px;
+
+  flex-shrink: 0;
+}
+
+
+.music-bars i {
+  display: block;
+
+  width: 3px;
+
+  border-radius: 3px;
+
+  background: #3b82f6;
+
+  transform-origin: bottom;
+
+  animation:
+    musicBar 0.7s ease-in-out
+    infinite alternate;
+}
+
+
+.music-bars i:nth-child(1) {
+  height: 7px;
+
+  animation-delay: 0s;
+}
+
+
+.music-bars i:nth-child(2) {
+  height: 14px;
+
+  animation-delay: 0.2s;
+}
+
+
+.music-bars i:nth-child(3) {
+  height: 9px;
+
+  animation-delay: 0.4s;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes musicPulse {
+  0%,
+  100% {
+    transform: scale(1);
+
+    opacity: 0.75;
+
+    box-shadow:
+      0 0 5px rgba(59, 130, 246, 0.3),
+      0 0 10px rgba(59, 130, 246, 0.2);
+  }
+
+  50% {
+    transform: scale(1.1);
+
+    opacity: 1;
+
+    box-shadow:
+      0 0 8px rgba(59, 130, 246, 0.7),
+      0 0 18px rgba(59, 130, 246, 0.45),
+      0 0 28px rgba(59, 130, 246, 0.2);
+  }
+}
+
+
+@keyframes musicBar {
+  from {
+    transform: scaleY(0.45);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  nav {
+    gap: 12px;
+
+    padding: 12px 16px;
+  }
+
+
+  .dock-btn {
+    font-size: 12px;
+  }
+
+
+  .dock-btn span {
+    font-size: 20px;
+  }
+
+
+  .mini-music {
+    width: 160px;
+
+    min-width: 160px;
+
+    max-width: 160px;
+
+    flex: 0 0 160px;
+  }
+
+
+  .mini-music-text {
+    width: 70px;
+
+    max-width: 70px;
+
+    flex: 0 1 70px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  nav {
+    bottom: 12px;
+
+    gap: 8px;
+
+    padding: 9px 10px;
+
+    width: calc(100vw - 20px);
+
+    justify-content: center;
+  }
+
+
+  .dock-btn {
+    font-size: 10px;
+
+    gap: 3px;
+  }
+
+
+  .dock-btn span {
+    font-size: 18px;
+  }
+
+
+  .mini-music {
+    width: auto;
+
+    min-width: 0;
+
+    max-width: 160px;
+
+    flex: 0 0 auto;
+
+    height: 44px;
+
+    min-height: 44px;
+
+    max-height: 44px;
+
+    padding: 6px 7px;
+
+    gap: 6px;
+  }
+
+
+  .mini-music-text {
+    display: none;
+  }
+
+
+  .mini-music-icon {
+    width: 29px;
+
+    height: 29px;
+  }
+
+
+  .mini-music-play {
+    width: 29px;
+
+    height: 29px;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+  nav {
+    gap: 5px;
+
+    padding: 8px;
+  }
+
+
+  .dock-btn {
+    font-size: 9px;
+  }
+
+
+  .dock-btn span {
+    font-size: 16px;
+  }
+
+
+  .mini-music {
+    max-width: 150px;
+
+    height: 42px;
+
+    min-height: 42px;
+
+    max-height: 42px;
+
+    padding: 5px;
+
+    gap: 5px;
+  }
+
+
+  .mini-music-icon {
+    width: 27px;
+
+    height: 27px;
+  }
+
+
+  .mini-music-play {
+    width: 27px;
+
+    height: 27px;
+
+    font-size: 10px;
+  }
+
+
+  .music-bars {
+    display: none;
+  }
 }

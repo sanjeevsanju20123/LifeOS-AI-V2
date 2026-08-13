@@ -1,0 +1,197 @@
+.executive-dashboard {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* HERO */
+
+.dashboard-hero {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* STATS */
+
+.dashboard-stats {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* ARES + TASKS */
+
+.dashboard-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.dashboard-ares,
+.dashboard-tasks {
+  min-width: 0;
+}
+
+/* ANALYTICS */
+
+.dashboard-analytics {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* AI + ACTIONS */
+
+.dashboard-bottom-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.dashboard-ai,
+.dashboard-actions {
+  min-width: 0;
+}
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+  .dashboard-main-grid,
+  .dashboard-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .executive-dashboard {
+    padding: 16px;
+  }
+}
+
+.dashboard-focus {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.dashboard-focus-timer {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* =========================================
+   Dashboard Layout Safety
+========================================= */
+
+.executive-dashboard {
+  position: relative;
+  isolation: isolate;
+}
+
+.dashboard-hero,
+.dashboard-stats,
+.dashboard-main-grid,
+.dashboard-focus,
+.dashboard-analytics,
+.dashboard-bottom-grid,
+.dashboard-focus-timer {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Keep dashboard sections separated */
+
+.dashboard-hero {
+  margin-bottom: 24px;
+}
+
+.dashboard-stats {
+  margin-bottom: 24px;
+}
+
+.dashboard-main-grid {
+  margin-bottom: 24px;
+}
+
+.dashboard-focus {
+  margin-bottom: 24px;
+}
+
+.dashboard-analytics {
+  margin-bottom: 24px;
+}
+
+.dashboard-bottom-grid {
+  margin-bottom: 24px;
+}
+
+/* Prevent children from visually escaping their grid area */
+
+.dashboard-main-grid > div,
+.dashboard-bottom-grid > div {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make analytics stay inside its own area */
+
+.dashboard-analytics {
+  overflow: hidden;
+}
+
+/* Focus stays in its own section */
+
+.dashboard-focus {
+  overflow: visible;
+}
+
+.dashboard-music {
+  width: 100%;
+  margin-bottom: 24px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   Smart Tasks + Music Layout
+========================================= */
+
+.dashboard-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  min-width: 0;
+  width: 100%;
+}
+
+.dashboard-tasks,
+.dashboard-music {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Music card */
+
+.dashboard-music {
+  margin: 0;
+}
+
+.dashboard-music .music-player {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent cards from escaping their column */
+
+.dashboard-right-column > * {
+  min-width: 0;
+  max-width: 100%;
+}

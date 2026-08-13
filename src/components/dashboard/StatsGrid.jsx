@@ -5,18 +5,17 @@ import { useFocus } from "../../context/FocusContext";
 function StatsGrid() {
   const { stats } = useFocus();
 
-  const totalMinutes = (stats?.totalMinutes ?? 0);
-  const totalSessions = (stats?.sessions ?? 0);
-  const streak = (stats?.streak ?? 0);
+  const totalMinutes = stats?.totalMinutes ?? 0;
+  const totalSessions = stats?.sessions ?? 0;
+  const streak = stats?.streak ?? 0;
 
-  // Weekly goal in minutes (5 hours by default). Adjust as you like.
   const weeklyGoalMinutes = 5 * 60;
+
   const focusScore = Math.min(
     100,
     Math.round((totalMinutes / weeklyGoalMinutes) * 100)
   );
 
-  // Format as "4.5h" similar to original
   const focusHours = (totalMinutes / 60).toFixed(1) + "h";
 
   const statsData = [
@@ -46,7 +45,7 @@ function StatsGrid() {
     <section className="stats-grid">
       {statsData.map((stat, index) => (
         <div className="stat-card" key={index}>
-          <div className="stat-icon">{stat.icon}</div>
+          <span className="stat-icon">{stat.icon}</span>
 
           <div>
             <p>{stat.title}</p>

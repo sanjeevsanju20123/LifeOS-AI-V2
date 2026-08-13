@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Environment / secrets
+.env
+.env.*
+!.env.example
+# Generated audio
+*.wav
+server/temp/
+
+# Local voice models
+server/voices/*.onnx
+server/voices/*.onnx.json
+
+# Local model files
+server/--model
+
+# Local backups / temporary files
+old-dashboard.txt
+
+# Local music files
+public/music/

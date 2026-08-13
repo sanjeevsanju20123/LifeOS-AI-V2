@@ -1,110 +1,186 @@
 import { useState } from "react";
 import "./TaskPanel.css";
+import { useTasks } from "../../context/TaskContext";
 
 function TaskPanel() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Complete LifeOS AI Dashboard",
-      category: "Work",
-      priority: "High",
-      due: "Today",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Read 20 Pages",
-      category: "Personal",
-      priority: "Medium",
-      due: "Today",
-      completed: false,
-    },
-    {
-      id: 3,
-      title: "Workout Session",
-      category: "Health",
-      priority: "Low",
-      due: "6:00 PM",
-      completed: false,
-    },
-  ]);
+  const {
+    tasks,
+    stats,
+    addTask,
+    toggleTask,
+  } = useTasks();
 
   const [newTask, setNewTask] = useState("");
+  const [priority, setPriority] = useState("Medium");
 
-  function addTask() {
+  function handleAddTask() {
     if (!newTask.trim()) return;
 
-    const task = {
-      id: Date.now(),
-      title: newTask,
+    addTask({
+      title: newTask.trim(),
       category: "General",
-      priority: "Medium",
+      priority,
       due: "Today",
-      completed: false,
-    };
+    });
 
-    setTasks([...tasks, task]);
     setNewTask("");
+    setPriority("Medium");
   }
 
-  function toggleTask(id) {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id
-          ? { ...task, completed: !task.completed }
-          : task
-      )
-    );
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      handleAddTask();
+    }
   }
 
   return (
     <section className="task-panel">
+
+      {/* HEADER */}
       <div className="section-header">
+
         <h2>📋 Smart Tasks</h2>
-        <span>{tasks.length} Tasks</span>
+
+        <div className="task-stats">
+
+          <div className="task-stat pending">
+            <strong>{stats.pending}</strong>
+            <span>Pending</span>
+          </div>
+
+          <div className="task-stat completed">
+            <strong>{stats.completed}</strong>
+            <span>Completed</span>
+          </div>
+
+          <div className="task-stat total">
+            <strong>{stats.total}</strong>
+            <span>Tasks</span>
+          </div>
+
+        </div>
+
       </div>
 
+
+      {/* ADD TASK */}
       <div className="task-input">
+
         <input
           type="text"
-          placeholder="Add a new task..."
           value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
+          onChange={(e) =>
+            setNewTask(e.target.value)
+          }
+          onKeyDown={handleKeyDown}
+          placeholder="Add a new task..."
         />
 
-        <button onClick={addTask}>
-          + Add
+        <select
+          value={priority}
+          onChange={(e) =>
+            setPriority(e.target.value)
+          }
+          className={`priority-select ${priority.toLowerCase()}`}
+        >
+          <option value="High">
+            High
+          </option>
+
+          <option value="Medium">
+            Medium
+          </option>
+
+          <option value="Low">
+            Low
+          </option>
+        </select>
+
+        <button
+          type="button"
+          onClick={handleAddTask}
+        >
+          + Add Task
         </button>
+
       </div>
 
+
+      {/* TASK LIST */}
       <div className="tasks-list">
-        {tasks.map((task) => (
-          <div className="task-item" key={task.id}>
 
-            <div
-              className="task-check"
-              onClick={() => toggleTask(task.id)}
-            >
-              {task.completed ? "✓" : ""}
-            </div>
-
-            <div className="task-info">
-              <h3>{task.title}</h3>
-
-              <p>
-                {task.category} • {task.due}
-              </p>
-            </div>
-
-            <div
-              className={`priority ${task.priority.toLowerCase()}`}
-            >
-              {task.priority}
-            </div>
-
+        {tasks.length === 0 ? (
+          <div className="empty-tasks">
+            📝 No tasks yet
           </div>
-        ))}
+        ) : (
+          tasks.map((task) => (
+
+            <div
+              className={`task-item ${
+                task.completed
+                  ? "completed"
+                  : ""
+              }`}
+              key={task.id}
+            >
+
+              {/* CHECK */}
+              <button
+                type="button"
+                className={`task-check ${
+                  task.completed
+                    ? "checked"
+                    : ""
+                }`}
+                onClick={() =>
+                  toggleTask(task.id)
+                }
+              >
+                {task.completed
+                  ? "✓"
+                  : ""}
+              </button>
+
+
+              {/* INFO */}
+              <div className="task-info">
+
+                <h3>
+                  {task.title}
+                </h3>
+
+                <p>
+                  {task.category ||
+                    "General"}
+                  {" • "}
+                  {task.due ||
+                    "Today"}
+                </p>
+
+              </div>
+
+
+              {/* PRIORITY */}
+              <div
+                className={`priority ${
+                  (
+                    task.priority ||
+                    "Medium"
+                  ).toLowerCase()
+                }`}
+              >
+                {task.priority ||
+                  "Medium"}
+              </div>
+
+            </div>
+
+          ))
+        )}
+
       </div>
+
     </section>
   );
 }

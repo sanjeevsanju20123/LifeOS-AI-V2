@@ -14,3 +14,739 @@ body {
 #root {
   min-height: 100vh;
 }
+
+.focus-analytics .metric .label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.focus-analytics .metric .value {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Focus Analytics Card */
+.focus-analytics {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-top: 20px;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+/* Header */
+.focus-analytics h2 {
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.focus-analytics p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Metrics layout */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Metric cards */
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.metric .label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.metric .value {
+  color: var(--text);
+  font-size: 28px;
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+/* Bottom summary */
+.focus-analytics-summary {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  color: var(--text);
+}
+
+.summary-muted {
+  color: var(--text-muted);
+}
+
+.focus-progress {
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.progress-track {
+  height: 10px;
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--secondary)
+  );
+  border-radius: 20px;
+  transition: width 0.6s ease;
+}
+
+.progress-info {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.ares-insight {
+  margin-top: 20px;
+  padding: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(59,130,246,0.15),
+    rgba(139,92,246,0.15)
+  );
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.ares-title {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.ares-insight p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Finance Page */
+
+.finance-page {
+  padding: 24px;
+}
+
+.finance-header h1 {
+  color: var(--text);
+  font-size: 32px;
+}
+
+.finance-header p {
+  color: var(--text-muted);
+}
+
+
+.finance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+
+.finance-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+
+.finance-card span {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+
+.finance-card h2 {
+  color: var(--text);
+  margin-top: 12px;
+  font-size: 28px;
+}
+
+
+.finance-insight {
+  margin-top: 24px;
+  padding: 20px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(59,130,246,0.15),
+    rgba(139,92,246,0.15)
+  );
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  color: var(--text);
+}
+
+.finance-insight p {
+  color: var(--text-muted);
+}
+
+/* =========================
+   FINANCE
+========================= */
+
+.finance-section {
+  margin-top: 24px;
+  padding: 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.finance-section h2 {
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+
+/* Transaction Form */
+
+.finance-form {
+  display: grid;
+  gap: 12px;
+}
+
+.finance-form input,
+.finance-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+
+.finance-form input:focus,
+.finance-form select:focus {
+  border-color: var(--primary);
+}
+
+
+/* Income / Expense buttons */
+
+.finance-type-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.finance-type-buttons button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.finance-type-buttons button:hover {
+  color: var(--text);
+  border-color: var(--primary);
+}
+
+.finance-type-buttons button.active {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  color: white;
+  border-color: transparent;
+}
+
+
+/* Add button */
+
+.finance-add-button {
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.finance-add-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* Transactions */
+
+.transaction-list {
+  display: grid;
+  gap: 10px;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.transaction-item strong {
+  color: var(--text);
+}
+
+.transaction-item p {
+  margin: 5px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.transaction-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.income-text {
+  color: #22c55e !important;
+}
+
+.expense-text {
+  color: #ef4444 !important;
+}
+
+.transaction-delete {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.transaction-delete:hover {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.finance-empty {
+  color: var(--text-muted);
+}
+
+/* Finance visibility fix */
+
+.finance-page {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+.finance-header,
+.finance-grid,
+.finance-section,
+.finance-insight {
+  position: relative;
+  z-index: 6;
+}
+
+.finance-section {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.finance-form {
+  display: grid;
+  visibility: visible;
+  opacity: 1;
+}
+
+.finance-form button {
+  position: relative;
+  z-index: 10;
+}
+
+.finance-page * {
+  visibility: visible;
+}
+
+.finance-chart-subtitle {
+  margin-top: -8px;
+  margin-bottom: 18px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.finance-chart {
+  width: 100%;
+  height: 280px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.finance-chart .recharts-text {
+  fill: var(--text-muted);
+}
+
+.transaction-date {
+  display: block;
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ============================= */
+/* FINANCE DATE FILTER */
+/* ============================= */
+
+.finance-filter-section {
+  margin-bottom: 24px;
+  padding: 22px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.finance-filter-section h2 {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.finance-filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.finance-filter-buttons button {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.finance-filter-buttons button:hover {
+  color: white;
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.finance-filter-buttons button.active {
+  color: white;
+  border-color: #3b82f6;
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+}
+
+.transaction-date {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ============================= */
+/* EXPENSE CATEGORY ANALYTICS */
+/* ============================= */
+
+.finance-category-chart {
+  width: 100%;
+  min-height: 320px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.finance-category-chart .recharts-legend-item-text {
+  color: var(--text-muted) !important;
+}
+
+.finance-category-chart .recharts-pie-label-text {
+  fill: var(--text);
+}
+
+/* ================================= */
+/* MONTHLY FINANCE DASHBOARD */
+/* ================================= */
+
+.monthly-finance-dashboard {
+  margin-bottom: 28px;
+  padding: 26px;
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.12),
+      rgba(139, 92, 246, 0.10)
+    );
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.25);
+}
+
+.monthly-finance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.monthly-finance-label {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.monthly-finance-header h2 {
+  margin: 6px 0 0;
+
+  color: var(--text);
+  font-size: 26px;
+}
+
+.monthly-savings-badge {
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(34,197,94,0.12);
+
+  border: 1px solid rgba(34,197,94,0.25);
+
+  color: #22c55e;
+
+  font-weight: 700;
+}
+
+.monthly-finance-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.monthly-finance-card {
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  transition: 0.3s;
+}
+
+.monthly-finance-card:hover {
+  transform: translateY(-4px);
+}
+
+.monthly-finance-card span {
+  display: block;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+
+  margin-bottom: 10px;
+}
+
+.monthly-finance-card strong {
+  font-size: 26px;
+  color: white;
+}
+
+.monthly-finance-card.income strong {
+  color: #22c55e;
+}
+
+.monthly-finance-card.expense strong {
+  color: #ef4444;
+}
+
+.monthly-finance-card.savings strong {
+  color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+
+  .monthly-finance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .monthly-finance-header {
+    align-items: flex-start;
+    gap: 15px;
+    flex-direction: column;
+  }
+
+}
+
+/* =========================================
+   FINANCE PERIOD
+========================================= */
+
+.finance-period {
+  margin: 24px 0;
+  padding: 18px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+
+  backdrop-filter: blur(14px);
+}
+
+.finance-period > span {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.finance-period-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.finance-period-buttons button {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: var(--text-muted);
+
+  padding: 9px 16px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.finance-period-buttons button:hover {
+  color: white;
+
+  background: rgba(59, 130, 246, 0.15);
+
+  border-color: rgba(59, 130, 246, 0.45);
+
+  transform: translateY(-1px);
+}
+
+.finance-period-buttons button.active {
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  border-color: transparent;
+
+  box-shadow:
+    0 8px 20px rgba(59, 130, 246, 0.25);
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .finance-period {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .finance-period-buttons {
+    width: 100%;
+  }
+
+  .finance-period-buttons button {
+    flex: 1;
+  }
+}
+
+/* Space between Financial Overview and Monthly Overview */
+
+.finance-grid {
+  margin-bottom: 28px;
+}
+
+.monthly-finance-dashboard {
+  margin-top: 0;
+}

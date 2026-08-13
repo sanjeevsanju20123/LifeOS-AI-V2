@@ -1,0 +1,9 @@
+.focus-analytics .metric .label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.focus-analytics .metric .value {
+  color: var(--text-primary);
+  font-weight: 700;
+}

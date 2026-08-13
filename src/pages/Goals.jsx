@@ -1,111 +1,509 @@
 import { useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useGoals from "../hooks/useGoals";
 import "./Goals.css";
+
 
 function Goals() {
 
-  const [goals, setGoals] = useLocalStorage("lifeos-goals", [
-    {
-      id: 1,
-      title: "Learn AI Development",
-      progress: 30,
-      completed: false,
-    },
-  ]);
+  const {
+    goals,
+    setGoals,
+    totalGoals,
+    completedGoals,
+    averageProgress,
+    updateGoalProgress,
+  } = useGoals();
 
-  const [newGoal, setNewGoal] = useState("");
 
+  const [
+    newGoal,
+    setNewGoal,
+  ] = useState("");
+
+
+  // =========================================
+  // ADD GOAL
+  // =========================================
 
   function addGoal() {
+
     if (!newGoal.trim()) return;
+
 
     const goal = {
       id: Date.now(),
-      title: newGoal,
+
+      title:
+        newGoal.trim(),
+
       progress: 0,
+
       completed: false,
+
+      priority: "medium",
     };
 
-    setGoals([...goals, goal]);
+
+    setGoals([
+      ...goals,
+      goal,
+    ]);
+
+
     setNewGoal("");
+
   }
 
 
-  function updateProgress(id) {
+  // =========================================
+  // UPDATE PRIORITY
+  // =========================================
+
+  function updatePriority(
+    id,
+    priority
+  ) {
+
     setGoals(
+
       goals.map((goal) =>
+
         goal.id === id
+
           ? {
               ...goal,
-              progress:
-                goal.progress >= 100
-                  ? 0
-                  : goal.progress + 10,
-              completed:
-                goal.progress + 10 >= 100,
+              priority,
             }
+
           : goal
+
       )
+
     );
+
   }
 
 
+  // =========================================
+  // DELETE GOAL
+  // =========================================
+
   function deleteGoal(id) {
+
     setGoals(
-      goals.filter((goal) => goal.id !== id)
+
+      goals.filter(
+        (goal) =>
+          goal.id !== id
+      )
+
     );
+
   }
 
 
   return (
-  <main className="container fade-up goals-page">
-    <h1>🎯 Goals</h1>
 
-    <div className="goal-input">
-      <input
-        value={newGoal}
-        onChange={(e) => setNewGoal(e.target.value)}
-        placeholder="Add a new goal..."
-      />
+    <main className="goals-page">
 
-      <button onClick={addGoal}>
-        Add Goal
-      </button>
-    </div>
+      {/* =========================================
+          HEADER
+      ========================================= */}
 
-    <div className="goal-list">
-      {goals.map((goal) => (
-        <div
-          key={goal.id}
-          className={`goal-card ${
-            goal.completed ? "completed-goal" : ""
-          }`}
-        >
-          <h2>{goal.title}</h2>
+      <div className="goals-header">
 
-          <p>Progress: {goal.progress}%</p>
+        <div>
 
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: `${goal.progress}%` }}
-            ></div>
-          </div>
+          <span className="goals-label">
+            🎯 LIFEOS GOALS
+          </span>
 
-          <div className="goal-actions">
-            <button onClick={() => updateProgress(goal.id)}>
-              +10%
-            </button>
 
-            <button onClick={() => deleteGoal(goal.id)}>
-              🗑 Delete
-            </button>
-          </div>
+          <h1>
+            Goals & Progress
+          </h1>
+
+
+          <p>
+            Turn your long-term ambitions
+            into measurable progress.
+          </p>
+
         </div>
-      ))}
-    </div>
-  </main>
-);
+
+      </div>
+
+
+      {/* =========================================
+          STATS
+      ========================================= */}
+
+      <div className="goals-stats">
+
+        <div className="goal-stat-card">
+
+          <span>
+            🎯
+          </span>
+
+
+          <div>
+
+            <p>
+              Total Goals
+            </p>
+
+            <strong>
+              {totalGoals}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div className="goal-stat-card">
+
+          <span>
+            ✅
+          </span>
+
+
+          <div>
+
+            <p>
+              Completed
+            </p>
+
+            <strong>
+              {completedGoals}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div className="goal-stat-card">
+
+          <span>
+            📊
+          </span>
+
+
+          <div>
+
+            <p>
+              Average Progress
+            </p>
+
+            <strong>
+              {averageProgress}%
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      {/* =========================================
+          CREATE GOAL
+      ========================================= */}
+
+      <section className="goal-create">
+
+        <div>
+
+          <h2>
+            Create a Goal
+          </h2>
+
+
+          <p>
+            What do you want to accomplish?
+          </p>
+
+        </div>
+
+
+        <div className="goal-input">
+
+          <input
+            value={newGoal}
+
+            onChange={(e) =>
+              setNewGoal(
+                e.target.value
+              )
+            }
+
+            onKeyDown={(e) => {
+
+              if (
+                e.key === "Enter"
+              ) {
+                addGoal();
+              }
+
+            }}
+
+            placeholder="e.g. Build my AI project..."
+          />
+
+
+          <button
+            type="button"
+            onClick={addGoal}
+          >
+            + Add Goal
+          </button>
+
+        </div>
+
+      </section>
+
+
+      {/* =========================================
+          GOALS
+      ========================================= */}
+
+      <section className="goals-section">
+
+        <div className="goals-section-header">
+
+          <h2>
+            Your Goals
+          </h2>
+
+
+          <span>
+
+            {totalGoals}{" "}
+
+            {totalGoals === 1
+              ? "goal"
+              : "goals"}
+
+          </span>
+
+        </div>
+
+
+        {goals.length === 0 ? (
+
+          <div className="empty-goals">
+
+            <div>
+              🎯
+            </div>
+
+
+            <h3>
+              No goals yet
+            </h3>
+
+
+            <p>
+              Add your first goal above
+              and start building momentum.
+            </p>
+
+          </div>
+
+        ) : (
+
+          <div className="goal-list">
+
+            {goals.map((goal) => (
+
+              <article
+                key={goal.id}
+
+                className={`goal-card ${
+                  goal.completed
+                    ? "completed-goal"
+                    : ""
+                }`}
+              >
+
+                {/* =========================================
+                    TOP
+                ========================================= */}
+
+                <div className="goal-card-top">
+
+                  <div>
+
+                    <span className="goal-icon">
+
+                      {goal.completed
+                        ? "✅"
+                        : "🎯"}
+
+                    </span>
+
+
+                    <h2>
+                      {goal.title}
+                    </h2>
+
+                  </div>
+
+
+                  <strong>
+                    {goal.progress}%
+                  </strong>
+
+                </div>
+
+
+                {/* =========================================
+                    PRIORITY
+                ========================================= */}
+
+                <div className="goal-priority">
+
+                  <span>
+                    Priority
+                  </span>
+
+
+                  <select
+                    value={
+                      goal.priority ||
+                      "medium"
+                    }
+
+                    onChange={(e) =>
+                      updatePriority(
+                        goal.id,
+                        e.target.value
+                      )
+                    }
+
+                    aria-label={`Priority for ${goal.title}`}
+                  >
+
+                    <option value="high">
+                      🔴 High
+                    </option>
+
+                    <option value="medium">
+                      🟡 Medium
+                    </option>
+
+                    <option value="low">
+                      🟢 Low
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                {/* =========================================
+                    PROGRESS INFO
+                ========================================= */}
+
+                <div className="goal-progress-info">
+
+                  <span>
+                    Progress
+                  </span>
+
+
+                  <span>
+
+                    {goal.completed
+
+                      ? "Completed"
+
+                      : `${100 -
+                          goal.progress}% remaining`}
+
+                  </span>
+
+                </div>
+
+
+                {/* =========================================
+                    PROGRESS BAR
+                ========================================= */}
+
+                <div className="progress-bar">
+
+                  <div
+                    className="progress-fill"
+
+                    style={{
+                      width:
+                        `${goal.progress}%`,
+                    }}
+                  />
+
+                </div>
+
+
+                {/* =========================================
+                    ACTIONS
+                ========================================= */}
+
+                <div className="goal-actions">
+
+                  <button
+                    type="button"
+
+                    onClick={() =>
+                      updateGoalProgress(
+                        goal.id
+                      )
+                    }
+
+                    disabled={
+                      goal.completed
+                    }
+                  >
+
+                    {goal.completed
+                      ? "✓ Completed"
+                      : "+10% Progress"}
+
+                  </button>
+
+
+                  <button
+                    type="button"
+
+                    className="delete-goal"
+
+                    onClick={() =>
+                      deleteGoal(
+                        goal.id
+                      )
+                    }
+                  >
+                    🗑 Delete
+                  </button>
+
+                </div>
+
+              </article>
+
+            ))}
+
+          </div>
+
+        )}
+
+      </section>
+
+    </main>
+
+  );
+
 }
+
 
 export default Goals;
